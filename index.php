@@ -13,6 +13,7 @@
             display: flex;
             flex-direction: row;
             padding: 16px;
+            Height : 50vh;
 
         }
 
@@ -27,7 +28,33 @@
             color: whitesmoke;
         }
 
+        .bas{
+            height : 40px;
+        }
+
+        iframe {
+            border: 1px solid black;
+            width: 100%;
+            height: 80%;
+        }
+
+        .output {
+            background: #eee;
+        }
+
+        body{
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .bottom{
+            height:30vh;
+        }
+
+
     </style>
+    <div class="top">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -84,7 +111,7 @@
         </nav>';
 
     ?>
-
+    </div>
     <div class="affichage">
         <?php
 
@@ -163,6 +190,36 @@
 
         ?>
     </div>
+
+    <div class="bottom">
+        <nav class="navbar navbar-expand-lg navbar-secondary bg-secondary" class="Bas">
+            <div class=" collapse navbar-collapse" id="navbarTogglerDemo01">
+            Object
+            </div>
+        </nav>
+        <?php
+        if (isset($_GET["object"]))
+        {  
+
+             $object = $_GET["object"]; 
+            
+                if (isset($_GET["Filtre"]))
+                {  
+                        $Filtre = $_GET["Filtre"];  
+                }
+            
+        }
+        echo"<iframe id='inlineFrameExample'
+            title='Inline Frame Example'
+            target-name = iframe;
+            width='300'
+            height='200'
+            src='http://127.0.0.1/marie1/IRON/object.php?entity=1'>
+        </iframe>";
+
+        ?>
+    </div>
+  
 </body>
 
 </html>
