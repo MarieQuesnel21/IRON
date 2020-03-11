@@ -1,0 +1,123 @@
+<HTML>
+	<HEAD>
+    <TITLE>I . R . O . N</TITLE>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" type="text/css" href="DropdownStyle.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/tail.select/"></script>
+    <script>
+		//------ Partie Javascript
+		$(document).ready(function(){ 
+      $("#searchbar").keyup(function(){
+        var key = $("#searchbar").val().toLowerCase();
+        $.post("requete.php",{ search: key },
+          function(data,status){ $("#search").html(data); });
+      });
+
+      $("#btn-supprimer").click(function(){
+        var key = $("#searchbar").val();
+        $.post("requete.php",{ supprimer: key },
+          function(data,status){ $("#search").html(data); });
+      });
+      
+      $("#btn-ajouter").click(function(){
+        $("#addInputName").val($("#searchbar").val());
+
+      });
+
+      $("#btnAjouterModal").click(function(){
+        var name = $("#addInputName").val();
+        var contenant = $("#addInputContenant").is(":checked")
+        if (contenant == "true"){ contenant = 1;} else { contenant = 0;}
+        var sizex = $("#addInputSizeX").val();
+        var sizey = $("#addInputSizeY").val();
+        var sizez = $("#addInputSizeZ").val();
+        var posx = $("#addInputPosX").val();
+        var posy = $("#addInputPosY").val();
+        var posz = $("#addInputPosZ").val();
+        $.post("requete.php",{ requeten: name, requetec: contenant, requetesx: sizex,requetesy: sizey,requetesz: sizez,requetepx: posx,requetepy: posy,requetepz: posz },
+          function(data,status){ $("#search").html(data); });
+      });
+
+    }); 
+
+    function clickResult(obj){
+      document.getElementById("searchbar").value = obj;
+    }
+
+    tail.select(".select-search", {
+      search: true
+    });
+		</script>
+	</HEAD>
+	<BODY BGCOLOR="GREY">
+		<CENTER>
+      <div id="ajouterModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+          <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title" text-align="center">IRON</h4>
+          </div>
+          <div class="modal-body">
+            <form>
+                <div class="form-row">
+                  <div class="input-group mb-3">
+                      <input type="text" class="form-control" placeholder="Nom" id="addInputName" aria-label="Nom" aria-describedby="basic-addon2">
+                      <div class="input-group-append">
+                        <div class="input-group-text">
+                          <input type="checkbox" id="addInputContenant" aria-label="Contenant ?">
+                          <span id="basic-addon2">Contenant</span>
+                        </div>
+                      </div>
+                  </div>
+                </div>
+                <label for="addInputSize">Dimension</label>
+                <div id="addInputSize" class="form-inline">
+                  <input type="number" class="form-control col-md-4" id="addInputSizeX" placeholder="X"/>
+                  <input type="number" class="form-control col-md-4" id="addInputSizeY" placeholder="Y"/>
+                  <input type="number" class="form-control col-md-4" id="addInputSizeZ" placeholder="Z">
+                </div>
+                <label for="addInputPos">Position</label>
+                <div id="addInputPos" class="form-inline">
+                  <input type="number" class="form-control col-md-4" id="addInputPosX" placeholder="X"/>
+                  <input type="number" class="form-control col-md-4" id="addInputPosY" placeholder="Y"/>
+                  <input type="number" class="form-control col-md-4" id="addInputPosZ" placeholder="Z"/>
+                </div>
+              </form>
+          </div>
+          <div class="modal-footer">
+            <button id="btnAjouterModal" type="button" class="btn btn-default" data-dismiss="modal">Ajouter</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+          </div>
+        </div>
+      </div>
+      <H1>DropDown</H1>
+      <select class="select" multiple>
+          <optgroup label="[...]">
+              <option>[...]</option>
+              <option>[...]</option>
+              <option>[...]</option>
+          </optgroup>
+      </select>
+      <div class="input-group mb-3">
+        <input id="searchbar" type="text" class="form-control" placeholder="Recherche" aria-label="Recherche" aria-describedby="basic-addon2"> 
+        <div class="input-group-append btn-group">
+              <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Option
+              </button>
+            <div class="dropdown-menu dropdown-menu-right">
+            <button id="btn-ajouter" class="dropdown-item" type="button" data-toggle="modal" data-target="#ajouterModal">Ajouter</button>
+            <button id="btn-modifier" class="dropdown-item" type="button">Modifier</button>
+            <button id="btn-deplacer" class="dropdown-item" type="button">Déplacer</button>
+            <button id="btn-supprimer" class="dropdown-item" type="button">Supprimer</button>
+          </div>
+        </div>
+      </div>
+      <p id="search"></p>
+    </CENTER>
+	</BODY>
+</HTML>

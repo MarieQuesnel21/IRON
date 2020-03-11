@@ -1,0 +1,183 @@
+input[type="radio"]:checked+label img {
+  outline: 3px solid red;
+} 
+
+html {
+    background-color: #f8f8f8;
+}
+
+body {
+    width: 100%;
+    height: 100%;
+
+}
+
+div {
+    width: 100%;
+
+
+}
+
+divo {
+    display: inline-block;
+    margin-left: 10%;
+    width: 70px;
+    height: 23%;
+    background-color: #f8f8f8;
+    margin-top: 2%;
+    border-radius: 2px;
+    padding-left: 10px;
+
+}
+
+
+.SearchContainer {
+    background-color: #18315e;
+    margin-top: -1em;
+    height: 10%;
+}
+
+.TagsContainer {
+    height: 10%;
+    background-color: #05183e;
+
+}
+
+.body {
+    height: 45%;
+    background-color: #f8f8f8;
+    padding-top: 5%;
+    padding-left: 5%;
+
+
+}
+
+.body img {
+    margin-left: 2%;
+}
+
+.body div {
+    width: 70px;
+    height: 100px;
+    float: left;
+    margin-left: 2%;
+}
+
+.PropertyContainer {
+    /*  position: absolute;*/
+    bottom: 0;
+    height: 26%;
+    background-color: #f8f8f8;
+    padding-left: 2%;
+
+
+}
+
+.WayContainer {
+    /*  position: absolute;*/
+    height: 8%;
+    background-color: #18315e;
+
+}
+
+.WayContainer .WaySearch {
+    /*    float : right;*/
+    width: 100px;
+    height: 8%;
+    background-color: #b4adac;
+    border: none;
+    position: absolute;
+    right: 0;
+}
+
+.WayContainer p {
+    float: left;
+    width: 80%;
+    /*    height: 100%;*/
+    color: #f8f8f8;
+    text-align: center;
+    font-size: 100%;
+
+
+}
+
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+
+}
+
+
+.search-btn {
+
+    height: 60%;
+    border-radius: 0 50px 50px 0;
+    float: left;
+    margin-top: 1.2em;
+    background-color: white;
+    border: none;
+    margin-right: 5px;
+
+}
+
+.add-btn {
+
+    height: 65%;
+    border-radius: 50px 50px 50px 50px;
+    float: right;
+    margin-right: 2em;
+    margin-top: 1.2em;
+    background-color: white;
+    border: none;
+
+}
+
+.add-containing {
+
+    
+    border-radius: 50px 50px 50px 50px;
+    
+    margin-right: 2em;
+    margin-top: 1.2em;
+    background-color: white;
+    border: none;
+
+}
+
+.search {
+
+    flex: 1;
+    height: 60%;
+    border: 1px solid white;
+    border-radius: 50px 0 0 50px;
+    margin-left: 1em;
+    float: left;
+    margin-top: 1.2em;
+    width: 16em;
+
+
+}
+
+.searchbar {
+    margin-top: 1em;
+}
+
+.InputT {
+    width: 90%;
+}
+
+.InputP {
+    width: 50%;
+}
+.keyword {
+    width: 90%;
+    height: 15%;
+}
+. containing {
+    width: 80%;
+}
+
