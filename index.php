@@ -13,6 +13,7 @@
             display: flex;
             flex-direction: row;
             padding: 16px;
+            Height : 50vh;
 
         }
 
@@ -27,16 +28,52 @@
             color: whitesmoke;
         }
 
+        .bas{
+            height : 40px;
+        }
+
+        iframe {
+            border: 1px solid black;
+            width: 100%;
+            height: 80%;
+        }
+
+        .output {
+            background: #eee;
+        }
+
+        body{
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .bottom{
+            height:30vh;
+        }
+
+
     </style>
+
+    <script>
+        function myFunction(obj) {
+        
+            var theId = obj.id;
+            var loc = "object.php?entity=" + theId;  
+            document.querySelector("iframe#oneIframe").setAttribute("src",loc);
+        }
+    </script>
+
+    <div class="top">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class=" collapse navbar-collapse" id="navbarTogglerDemo01">
-            <a class="navbar-brand" href="#">Acceuil</a>
+            <a class="navbar-brand" href="#">Accueil</a>
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Ajouter</a>
+                    <a class="nav-link" href="new.php">Ajouter</a>
                 </li>
             </ul>
             <?php
@@ -84,7 +121,7 @@
         </nav>';
 
     ?>
-
+    </div>
     <div class="affichage">
         <?php
 
@@ -100,7 +137,7 @@
                 {
                       $con = mysqli_connect( "localhost" , "root" , "" , "projetiron" );
 
-                    $Filtre="select e.nom
+                    $Filtre="select e.nom, e.id_entity,
                     from entity as e
                     inner join asso_entity_keyword as aek
                     on e.id_entity = aek.num_entity
@@ -111,7 +148,7 @@
 
                      while ($ligne = mysqli_fetch_array($Filtre1,MYSQLI_ASSOC))
                           {
-                            echo "<div class='affichageobject'>";
+                            echo "<div id='" .$ligne['id_entity']."' class='affichageobject' onclick='myFunction(this)'>";
                             echo $ligne['nom'];
                             echo "</div>";
                           }
@@ -121,12 +158,12 @@
                 {
                 $con = mysqli_connect( "localhost" , "root" , "" , "projetiron" );
 
-                $test="SELECT nom from entity where nom Like '".$object."%' "; 
+                $test="SELECT id_entity,nom from entity where nom Like '".$object."%' "; 
                 $test1 =mysqli_query($con,$test);
 
                  while ($ligne = mysqli_fetch_array($test1,MYSQLI_ASSOC))
                       {
-                        echo "<div class='affichageobject'>";
+                        echo "<div id='" .$ligne['id_entity']."' class='affichageobject' onclick='myFunction(this)'>";
                         echo $ligne['nom'];
                         echo "</div>";
                       }
@@ -138,12 +175,12 @@
              {
                 $con = mysqli_connect( "localhost" , "root" , "" , "projetiron" );
 
-                $test="SELECT nom from entity where nom Like '".$object."%' "; 
+                $test="SELECT id_entity, nom from entity where nom Like '".$object."%' "; 
                 $test1 =mysqli_query($con,$test);
 
                  while ($ligne = mysqli_fetch_array($test1,MYSQLI_ASSOC))
                       {
-                        echo "<div class='affichageobject'>";
+                        echo "<div id='" .$ligne['id_entity']."' class='affichageobject' onclick='myFunction(this)'>";
                         echo $ligne['nom'];
                         echo "</div>";
                       }
@@ -163,6 +200,37 @@
 
         ?>
     </div>
+
+    <div class="bottom">
+        <nav class="navbar navbar-expand-lg navbar-secondary bg-secondary" class="Bas">
+            <div class=" collapse navbar-collapse" id="navbarTogglerDemo01">
+            Object
+            </div>
+        </nav>
+        <?php
+        if (isset($_GET["object"]))
+        {  
+
+             $object = $_GET["object"]; 
+            
+                if (isset($_GET["Filtre"]))
+                {  
+                        $Filtre = $_GET["Filtre"];  
+                }
+            
+        }
+        echo"<iframe
+            id='oneIframe'
+            title='Inline Frame Example'
+            target-name = iframe;
+            width='300'
+            height='200'
+            src=''>
+        </iframe>";
+
+        ?>
+    </div>
+  
 </body>
 
 </html>
