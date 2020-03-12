@@ -137,7 +137,7 @@
                 {
                       $con = mysqli_connect( "localhost" , "root" , "" , "projetiron" );
 
-                    $Filtre="select e.nom, e.id_entity,
+                    $Filtre="select e.nom, e.id_entity
                     from entity as e
                     inner join asso_entity_keyword as aek
                     on e.id_entity = aek.num_entity
