@@ -54,6 +54,16 @@
 
 
     </style>
+
+    <script>
+        function myFunction(obj) {
+        
+            var theId = obj.id;
+            var loc = "object.php?entity=" + theId;  
+            document.querySelector("iframe#oneIframe").setAttribute("src",loc);
+        }
+    </script>
+
     <div class="top">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
@@ -127,7 +137,7 @@
                 {
                       $con = mysqli_connect( "localhost" , "root" , "" , "projetiron" );
 
-                    $Filtre="select e.nom
+                    $Filtre="select e.nom, e.id_entity,
                     from entity as e
                     inner join asso_entity_keyword as aek
                     on e.id_entity = aek.num_entity
@@ -138,7 +148,7 @@
 
                      while ($ligne = mysqli_fetch_array($Filtre1,MYSQLI_ASSOC))
                           {
-                            echo "<div class='affichageobject'>";
+                            echo "<div id='" .$ligne['id_entity']."' class='affichageobject' onclick='myFunction(this)'>";
                             echo $ligne['nom'];
                             echo "</div>";
                           }
@@ -148,12 +158,12 @@
                 {
                 $con = mysqli_connect( "localhost" , "root" , "" , "projetiron" );
 
-                $test="SELECT nom from entity where nom Like '".$object."%' "; 
+                $test="SELECT id_entity,nom from entity where nom Like '".$object."%' "; 
                 $test1 =mysqli_query($con,$test);
 
                  while ($ligne = mysqli_fetch_array($test1,MYSQLI_ASSOC))
                       {
-                        echo "<div class='affichageobject'>";
+                        echo "<div id='" .$ligne['id_entity']."' class='affichageobject' onclick='myFunction(this)'>";
                         echo $ligne['nom'];
                         echo "</div>";
                       }
@@ -165,12 +175,12 @@
              {
                 $con = mysqli_connect( "localhost" , "root" , "" , "projetiron" );
 
-                $test="SELECT nom from entity where nom Like '".$object."%' "; 
+                $test="SELECT id_entity, nom from entity where nom Like '".$object."%' "; 
                 $test1 =mysqli_query($con,$test);
 
                  while ($ligne = mysqli_fetch_array($test1,MYSQLI_ASSOC))
                       {
-                        echo "<div class='affichageobject'>";
+                        echo "<div id='" .$ligne['id_entity']."' class='affichageobject' onclick='myFunction(this)'>";
                         echo $ligne['nom'];
                         echo "</div>";
                       }
@@ -209,12 +219,13 @@
                 }
             
         }
-        echo"<iframe id='inlineFrameExample'
+        echo"<iframe
+            id='oneIframe'
             title='Inline Frame Example'
             target-name = iframe;
             width='300'
             height='200'
-            src='http://127.0.0.1/marie1/IRON/object.php?entity=1'>
+            src=''>
         </iframe>";
 
         ?>
