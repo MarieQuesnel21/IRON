@@ -167,7 +167,8 @@ li a {
 }
 
 .InputT {
-    width: 90%;
+    width: 80%;
+    min-width: 160px;
 }
 
 .InputP {
@@ -177,7 +178,28 @@ li a {
     width: 90%;
     height: 15%;
 }
-. containing {
+.containing {
     width: 80%;
 }
 
+.form-container {
+    margin-right: auto;
+    margin-left: auto;
+    max-width: 800px;
+    width: 80%;
+}
+
+#valider {
+    margin-top: 30px;
+}
+
+#container-valider {
+    margin-right: auto;
+    margin-left: auto;
+    max-width: 800px;
+    width: 80%;
+}
+
+td {
+    padding-top: 20px;
+}
