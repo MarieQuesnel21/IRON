@@ -22,6 +22,9 @@
             height: 200px;
             border: 1px solid black;
             margin: 0 8px 0 8px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
 
         .tag {
@@ -52,7 +55,21 @@
             height:30vh;
         }
 
+        .modifier{
+            width: 100%;
+        }   
 
+        .btn{
+            border-radius: 0px !important;
+        }
+
+        .object{
+            color : white;
+        }
+
+        .image{
+            width: 50%;
+        }
     </style>
 
     <script>
@@ -125,6 +142,28 @@
     <div class="affichage">
         <?php
 
+        function image ($image)
+        {
+            if ($image == "1")
+            {
+                echo "<center><img src='image/hammer.png' class='image'></center>";
+            }
+            elseif ($image == "2")
+            {
+                echo "<center><img src='image/spanner.png' class='image'></center>";
+            }
+            elseif ($image == "3")
+            {
+                echo "<center><img src='image/box.png' class='image'></center>";
+            }
+            elseif ($image == "4")
+            {
+                echo "<center><img src='image/bicycle.png' class='image'></center>";
+            }
+        }
+
+
+        $con = mysqli_connect( "localhost" , "root" , "" , "projetiron" );
          if (isset($_GET["object"]))
         {
              
@@ -135,9 +174,9 @@
                 $Filtre = $_GET["Filtre"];  
                 if(!empty($Filtre))
                 {
-                      $con = mysqli_connect( "localhost" , "root" , "" , "projetiron" );
+                     
 
-                    $Filtre="select e.nom, e.id_entity
+                    $Filtre="select e.nom, e.id_entity, e.`image`
                     from entity as e
                     inner join asso_entity_keyword as aek
                     on e.id_entity = aek.num_entity
@@ -149,22 +188,26 @@
                      while ($ligne = mysqli_fetch_array($Filtre1,MYSQLI_ASSOC))
                           {
                             echo "<div id='" .$ligne['id_entity']."' class='affichageobject' onclick='myFunction(this)'>";
-                            echo $ligne['nom'];
+                            echo "<button type='button' class='btn btn-secondary modifier'>".$ligne['nom']."</button>";
+                            image($ligne['image']);
+                            echo "<a href='modifier.php?object=" .$ligne['id_entity']."'><button type='button' class='btn btn-secondary modifier'>Modifier</button></a>";
                             echo "</div>";
                           }
 
                 }
                 else 
                 {
-                $con = mysqli_connect( "localhost" , "root" , "" , "projetiron" );
+               
 
-                $test="SELECT id_entity,nom from entity where nom Like '".$object."%' "; 
+                $test="SELECT id_entity,nom, `image` from entity where nom Like '".$object."%' "; 
                 $test1 =mysqli_query($con,$test);
 
                  while ($ligne = mysqli_fetch_array($test1,MYSQLI_ASSOC))
                       {
                         echo "<div id='" .$ligne['id_entity']."' class='affichageobject' onclick='myFunction(this)'>";
-                        echo $ligne['nom'];
+                        echo "<button type='button' class='btn btn-secondary modifier'>".$ligne['nom']."</button>";
+                        image($ligne['image']);
+                        echo "<a href='modifier.php?object=" .$ligne['id_entity']."'><button type='button' class='btn btn-secondary modifier'>Modifier</button></a>";
                         echo "</div>";
                       }
              
@@ -173,15 +216,17 @@
              
              else 
              {
-                $con = mysqli_connect( "localhost" , "root" , "" , "projetiron" );
+                
 
-                $test="SELECT id_entity, nom from entity where nom Like '".$object."%' "; 
+                $test="SELECT id_entity, nom, `image` from entity where nom Like '".$object."%' "; 
                 $test1 =mysqli_query($con,$test);
 
                  while ($ligne = mysqli_fetch_array($test1,MYSQLI_ASSOC))
                       {
                         echo "<div id='" .$ligne['id_entity']."' class='affichageobject' onclick='myFunction(this)'>";
-                        echo $ligne['nom'];
+                        echo "<button type='button' class='btn btn-secondary modifier'>".$ligne['nom']."</button>";
+                        image($ligne['image']);
+                        echo "<a href='modifier.php?object=" .$ligne['id_entity']."'><button type='button' class='btn btn-secondary modifier'>Modifier</button></a>";
                         echo "</div>";
                       }
              
@@ -203,8 +248,8 @@
 
     <div class="bottom">
         <nav class="navbar navbar-expand-lg navbar-secondary bg-secondary" class="Bas">
-            <div class=" collapse navbar-collapse" id="navbarTogglerDemo01">
-            Object
+            <div class=" collapse navbar-collapse object" id="navbarTogglerDemo01">
+                Object
             </div>
         </nav>
         <?php

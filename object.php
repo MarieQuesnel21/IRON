@@ -13,6 +13,7 @@
       echo "<tr><td>Object : " .$ligne['nom']."</td><tr>";
       echo "<tr><td>Dimention : ".$ligne['dimensionx']." | ".$ligne['dimensiony']." | ".$ligne['dimensionz']."</td><tr>";
       echo "<tr><td>Dimention : ".$ligne['positionx']." | ".$ligne['positiony']." | ".$ligne['positionz']."</td><tr>";
+      echo "<tr></tr>";
       echo"</table>";
     }
 

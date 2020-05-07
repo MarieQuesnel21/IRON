@@ -10,7 +10,50 @@
 </head>
 
 <body>
-    
+    <style>
+        body {
+            height: 100%;
+        }
+        input[type="radio"]:checked+label img {
+            outline: 3px solid #343a40 !important;
+        }   
+
+        .form-container{
+            background-color: #9DD2CB;
+            width: 100%;
+            padding: 16px;
+            margin-top: 16px;    
+        }
+
+        .form-control {
+            display: block;
+            width: 100%;
+            height: calc(1.5em + .75rem + 2px);
+            padding: .375rem .75rem;
+            font-size: 1rem;
+            font-weight: 400;
+            line-height: 1.5;
+            color: #495057;
+            background-color: #fff;
+            background-clip: padding-box;
+            border: 1px solid #ced4da;
+            border-radius: .25rem;
+            transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+        }
+
+
+        .direction{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+        }
+
+        .direction input{
+            margin : 6px;
+        }
+        
+    </style>
+
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -32,77 +75,83 @@
     <div class="form-container">
         <form method="post" action="traitement.php">
             <br>
-            <table>
-                <tr>
-                    <td>Nom :</td>
-                    <td><input type=text name="nom" id="nom" required></td>
-                
-                </tr>
-                <tr>
-                    <td>Dimensions : </td>
-                    <td>L : <input type="text" class="InputT" name="L" id="L"></td>
-                    <td>l : <input type="text" class="InputT" name="l" id="l"></td>
-                    <td>h : <input type="text" class="InputT" name="h" id="h"></td>
-                </tr>
+              
+                <p> Nom :</p>
+                <input type=text name="nom" id="nom" class="form-control" required>
             
-                <br><br>
-                <tr >
-                    <td>Mot clé (séparé par ";") : </td>
-                    <td colspan="3"><input type="text" class="keyword" name="keyword" id="keyword" required></td>
-                </tr>
-                <tr>
-                    <td>Contenant : </td>
-                    <td>
-                        <div>
-                            <input type="radio" id="huey" name="containing" value="1" checked required>
-                            <label for="huey">Oui</label>
-                        </div>
-                    </td>
-                    <td>
-                        <div>
-                            <input type="radio" id="dewey" name="containing" value="0" required>
-                            <label for="dewey">Non</label>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Position : </td>
-                    <td>X : <input type="text" class="InputT" name="positionx" id="x"></td>
-                    <td>Y : <input type="text" class="InputT" name="positiony" id="y"></td>
-                    <td>Z : <input type="text" class="InputT" name="positionz" id="z"></td>
-                    <!--
-                 <td><button class="add-containing"><a href="index.php"><img src="image/add.png" width="32px" alt="Settings Button"></a>
-                     </button></td>
+                <hr>
+            
+                <p> Dimensions : </p>
+                <div class="direction"><p>L</p><p>l</p><p>h</p></div>
+                <div class="direction">
+                    <input type="text" class="InputT" name="L" id="L">
+                    <input type="text" class="InputT" name="l" id="l">
+                    <input type="text" class="InputT" name="h" id="h">
+                </div>
+                
+                <hr>
+        
+                <p>Mot clé (séparé par ";") : <p>
+                <input type="text" class="keyword" name="keyword" id="keyword" required>
+            
+                <hr>
+               
+                <p> Contenant : </p>
+                
+                <div>
+                    <input type="radio" id="huey" name="containing" value="1" checked required>
+                    <label for="huey">Oui</label>
+                </div>
+            
+            
+                <div>
+                    <input type="radio" id="dewey" name="containing" value="0" required>
+                    <label for="dewey">Non</label>
+                </div>
+                
+                <hr>
+
+                <p>Position : </p>
+                <div class="direction"><p>X</p><p>Y</p><p>Z</p></div>
+                <div class="direction">
+                    <input type="text" class="InputT" name="positionx" id="x">
+                    <input type="text" class="InputT" name="positiony" id="y">
+                    <input type="text" class="InputT" name="positionz" id="z">
+                </div>
+            
+                <!--
+            <button class="add-containing"><a href="index.php"><img src="image/add.png" width="32px" alt="Settings Button"></a>
+                    </button>
     -->
-                </tr>
-                <tr>
-                    <td>Contenu dans : </td>
+                <hr>
+            
+                <p>Contenu dans : </p>
 
-                    <td>
+                
 
-                        <?php
-                        $con = mysqli_connect( "localhost" , "root" , "" , "projetiron" );
+                    <?php
+                    $con = mysqli_connect( "localhost" , "root" , "" , "projetiron" );
 
-                        $req = "Select * from entity where contenant='1';";
-                        $Resultat = mysqli_query($con,$req);
+                    $req = "Select * from entity where contenant='1';";
+                    $Resultat = mysqli_query($con,$req);
 
-                        echo'<select name="contenue" id="pet-select" >';
+                    echo'<select name="contenue" id="pet-select" class="form-control">';
 
-                        echo'<option value=0 selected> </option>';
-                        while (  $ligne = mysqli_fetch_array($Resultat,MYSQLI_ASSOC)  )
-                        {      
+                    echo'<option value=0 selected> </option>';
+                    while (  $ligne = mysqli_fetch_array($Resultat,MYSQLI_ASSOC)  )
+                    {      
 
-                            //echo' <button class="dropdown-item" type="button" value="'.$ligne['id_entity'].'">'. $ligne['nom'] .'</button>';
-                            echo'<option value="'.$ligne['id_entity'].'">'. $ligne['nom'] .'</option>';
-                        }     
+                        //echo' <button class="dropdown-item" type="button" value="'.$ligne['id_entity'].'">'. $ligne['nom'] .'</button>';
+                        echo'<option value="'.$ligne['id_entity'].'">'. $ligne['nom'] .'</option>';
+                    }     
 
-                        echo'</select>'
-                        ?>
+                    echo'</select>'
+                    ?>
 
-                    </td>
-                </tr>
-            </table>
-            <br><br>
+                
+            
+           
+                <hr>
 
                 <?php
                 $con = mysqli_connect( "localhost" , "root" , "" , "projetiron" );
@@ -111,16 +160,25 @@
                 $Resultat = mysqli_query($con,$req);
 
                 while (  $ligne = mysqli_fetch_array($Resultat,MYSQLI_ASSOC)  )
-                {      
-                    echo' <input type="radio" name="image" value="'.$ligne['id_image'].'" id="radio-choice-1" />
-                    <label for="radio-choice-1"><img src="image/'.$ligne['lien'].'.png" alt=""  width="80px" height="80px"></label>';
-
+                {     
+            
+                    if ($ligne['lien'] == "autre") 
+                    {
+                        echo' <input type="radio" name="image" value="'.$ligne['id_image'].'" id="radio-choice-1" >
+                        <label for="radio-choice-1"><img src="image/'.$ligne['lien'].'.png" alt=""  width="80px" height="80px"></label>';    
+                    }
+                    else
+                    {
+                        echo' <input type="radio" name="image" value="'.$ligne['id_image'].'" id="radio-choice-1" checked>
+                        <label for="radio-choice-1"><img src="image/'.$ligne['lien'].'.png" alt=""  width="80px" height="80px"></label>';    
+                    }
+                   
                 }
                 ?> 
 
             <div id="container-valider"> 
                 <center>
-                    <input id="valider" type="submit" value="Valider" onclick="testInput()">
+                    <input id="valider" type="submit" value="Valider"  class="btn btn-secondary" onclick="testInput()">
                 </center>
             </div>
         </form>
